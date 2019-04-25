@@ -2,10 +2,10 @@
     
     "builders": [{
       "type": "amazon-ebs",
-      "region": "us-east-1",
-      "source_ami_filter": "ami-02bcbb802e03574ba ",
+      "region": "us-west-1",
+      "source_ami_filter": "ami-07683a44e80cd32c5",
       "instance_type": "t2.micro",
-      "ssh_username": "ec2-useree",
+      "ssh_username": "ec2-user",
       "ami_name": "update-ami {{timestamp}}"
     }]
   } 
