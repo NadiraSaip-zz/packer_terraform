@@ -8,4 +8,4 @@
       "ssh_username": "ec2-useree",
       "ami_name": "update-ami {{timestamp}}"
     }]
-  }
+  } 
