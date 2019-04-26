@@ -6,7 +6,7 @@
 
     "builders": [{
       "type": "amazon-ebs",
-      "region": "us-east-1",
+      "region": "eu-west-1",
       "source_ami": "ami-0de53d8956e8dcf80",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
