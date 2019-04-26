@@ -1,0 +1,4 @@
+{ 
+      "wordpress_version": "5.1",
+      "instance_type": "m5.large"
+    }

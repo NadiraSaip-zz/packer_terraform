@@ -1,4 +1,9 @@
-{
+{ 
+  "variables" : {
+    "wordpress_version": "5.1",
+    "instance_type": "m5.large"
+  },
+
     "builders": [{
       "type": "amazon-ebs",
       "region": "us-east-1",
@@ -7,8 +12,9 @@
       "ssh_username": "ec2-user",
       "ami_name": "updated_ami {{timestamp}}"
     }],
-    "provisioners": [{
-      "type": "shell",
+    "provisioners": [
+      {
+      "type":  "shell",
       "inline": [
         "sudo yum update -y",
         "sudo yum install php unzip php-mysql httpd -y",
