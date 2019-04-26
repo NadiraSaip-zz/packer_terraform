@@ -6,7 +6,7 @@
       "source_ami_filter": "ami-07683a44e80cd32c5",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "ami_name": "update_ami {{timestamp}}"
+      "ami_name": "update_ami-{{timestamp}}"
     }], 
     "provisioners": [{
         "type": "shell",
