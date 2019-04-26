@@ -1,0 +1,40 @@
+{
+    "builders": [{
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "source_ami": "ami-0de53d8956e8dcf80",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "ami_name": "updated_ami {{timestamp}}"
+    }],
+    "provisioners": 
+    [
+      {
+      "type": "shell",
+      "inline": [
+        "sudo yum update -y",
+        "sudo yum install php unzip php-mysql httpd -y",
+        "sudo yum install mysql mariadb-server httpd -y",
+        "sudo yum install wget -y",
+        "sudo wget https://wordpress.org/latest.zip",
+        "sudo unzip latest.zip",
+        "sudo rsync -avP ~/wordpress/* /var/www/html/",
+        "sudo chown -R apache:apache /var/www/html/*",
+        "sudo systemctl enable httpd",
+        "sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo",
+        "sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key",
+        "sudo yum install jenkins",
+        "sudo yum install java",
+        "sudo yum install java-1.8.0-openjdk ",
+        "sudo systemctl enable jenkins"]
+      }
+       
+     {
+      "type": "file",
+      "source": "test_file",
+      "destination": "/tmp/test_file"
+    } 
+  ]
+
+} 
+    
