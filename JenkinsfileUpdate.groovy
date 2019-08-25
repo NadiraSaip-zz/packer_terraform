@@ -59,14 +59,18 @@ pipeline{
         }
         stage("Filter AMI"){
             steps{
-                def AMI
-                    if (REGION == "us-east-1") {
-                        AMI = "ami-0de53d8956e8dcf80"
-                } else if (REGION == "us-east-2"){
-                    AMI = "ami-0d8f6eb4f641ef691"
+                script{
+                //def AMI
+                  //  if (REGION == "us-east-1") {
+                    //    AMI = "ami-0de53d8956e8dcf80"
+                //} else if (REGION == "us-east-2"){
+                  //  AMI = "ami-0d8f6eb4f641ef691"
+                  echo "Hello"
+               
                 } 
             }
         }
+    }
         stage("Build Image"){
             steps{
                 sh 'packer build  -var "region=${REGION}" updates/ami.json'

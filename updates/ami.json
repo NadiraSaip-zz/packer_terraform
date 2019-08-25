@@ -1,19 +1,25 @@
+
 {
-    
-    "builders": [{
-      "type": "amazon-ebs",
-      "region": "{{user `region`}}",
-      "source_ami_filter": "ami-0de53d8956e8dcf80 ",
-      "instance_type": "t2.micro",
-      "ssh_username": "ec2-user",
-      "ami_name": "update_ami {{timestamp}}"
-    }], 
-    "provisioners": [{
-        "type": "shell",
-        "inline": [
-          "sudo yum update -y"
-        ]
-        }]
-    }
-
-
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "{{user `region` }}",
+    "instance_type": "t2.micro",
+    "ssh_username": "centos",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "CentOS Linux 7 x86_64 HVM EBS *",
+        "root-device-type": "ebs"
+      },
+      "owners": ["679593333241"],
+      "most_recent": true
+    },
+    "ami_name": "updated-ami {{timestamp}}"
+  }],
+  "provisioners": [{
+          "type": "shell",
+          "inline": [
+              "sudo yum update -y"
+          ]
+      }
+  ]
