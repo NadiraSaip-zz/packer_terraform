@@ -6,11 +6,9 @@ pipeline{
                 sh '''
                 set +xe
                 echo Hello
-                ech Hello
-                sudo yum install unzip httpd -y
+                ech Error
+                sudo yum install httpd wget unzip -y
                 ping -c 4 google.com
-                sudo yum install telnet -y
-                sudo yum install wget -y
                 '''
             }
         }
@@ -22,20 +20,21 @@ pipeline{
                         if (exists) {
                             sh "unzip -o terraform_0.12.7_linux_amd64.zip"
                             sh "sudo mv terraform /bin"
+                            sh "terraform version"
                         } else {
                             sh "wget https://releases.hashicorp.com/terraform/0.12.7/terraform_0.12.7_linux_amd64.zip"
                             sh "unzip -o terraform_0.12.7_linux_amd64.zip"
                             sh "sudo mv terraform /bin"
+                            sh "terraform version"
                         }
                     }
                 }
-            }       
+            }
         }
-        stage("write to a file"){
+        stage("Write to a file"){
             steps{
                 ws("tmp/"){
-                    writeFile text: "Test", file: "Testfileœ"
-
+                    writeFile text: "Test", file: "TestFile"
                 }
             }
         }
@@ -47,6 +46,7 @@ pipeline{
                         if (exists) {
                             sh "unzip -o packer_1.4.3_linux_amd64.zip"
                             sh "sudo mv packer /bin"
+                            sh "packer version"
                         } else {
                             sh "wget https://releases.hashicorp.com/packer/1.4.3/packer_1.4.3_linux_amd64.zip"
                             sh "unzip -o packer_1.4.3_linux_amd64.zip"
@@ -55,33 +55,22 @@ pipeline{
                         }
                     }
                 }
-            }       
-        }
-        stage("Pull Repo"){
-            steps{
-                git("https://github.com/NadiraSaip/packer_terraform.git")
             }
         }
         stage("Build Image"){
             steps{
-                // sh "packer image build updates/ami.json"
+                //sh "packer build updated/updated.json"
                 echo "Hello"
-
             }
         }
     }
-        post{
-           succes{
-               echo "Done"
-           }
-           failure {
-               mail to: "testsaip1@gmail.com", subject: “job”, body: "job completed"
-           }
+    post{
+        success {
+            echo "Done"
         }
-           
+        failure {
+            mail to:  "chaglare@gmail.com", subject: "job", body: "job completed"
+        }
+          
     }
-
-
-
-
-
+}
