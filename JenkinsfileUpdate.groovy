@@ -59,7 +59,7 @@ pipeline{
         }
         stage("Build Image"){
             steps{
-                sh "packer build  -var "region=${REGION}" updates/ami.json"
+                sh 'packer build  -var "region=${REGION}" updates/ami.json'
                 echo "Hello"
             }
         }
@@ -74,3 +74,4 @@ pipeline{
           
     }
 }
+
