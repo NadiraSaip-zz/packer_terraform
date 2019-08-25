@@ -71,7 +71,7 @@ pipeline{
         }
     }
         post{
-           succes {
+           succes{
                echo "Done"
            }
            failure {
@@ -80,7 +80,7 @@ pipeline{
         }
            
     }
-    
+
 
 
 
